@@ -1,0 +1,14 @@
+{
+    "login": "Entrar",
+    "loginFailed": "Usuário ou senha incorretos",
+    "username": "Usuário",
+    "password": "Senha",
+    "welcome": "Bem vindo!",
+    "transformLife": "Transforme sua rotina com organização e saúde",
+    "email": "E-mail",
+    "lostPassword": "Esqueceu sua senha? Clique aqui!",
+    "signUp": "Cadastre-se",
+    "signIn": "Ir para login",
+    "passwordConfirm": "Confirme sua senha",
+    "name": "Nome completo"
+}

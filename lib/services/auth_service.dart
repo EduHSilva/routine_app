@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:routineapp/config/app_config.dart';
 import '../models/auth_response.dart';
 
 class AuthService {
-  final String apiUrl = 'http://192.168.0.94:3006/api/v1/login'; // URL da API
+  final String apiUrl = '${AppConfig.apiUrl}login';
 
-  Future<AuthResponse?> authenticate(AuthRequest authRequest) async {
+  Future<AuthResponse?> login(AuthRequest authRequest) async {
+    http.Client client = await AppConfig.getHttpClient();
+
     try {
-      final response = await http.post(
+      final response = await client.post(
         Uri.parse(apiUrl),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -22,11 +25,11 @@ class AuthService {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
         return AuthResponse.fromJson(jsonResponse);
       } else {
-        // Falha na autenticação
         return null;
       }
     } catch (e) {
-      return null;
+      //
     }
+    return null;
   }
 }
