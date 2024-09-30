@@ -9,6 +9,14 @@
     "lostPassword": "Esqueceu sua senha? Clique aqui!",
     "signUp": "Cadastre-se",
     "signIn": "Ir para login",
-    "passwordConfirm": "Confirme sua senha",
-    "name": "Nome completo"
+    "confirmPassword": "Confirme sua senha",
+    "name": "Nome completo",
+    "error": "Ocorreu um erro em sua solicitação!",
+    "success": "Operação realizada com sucesso!",
+    "passwordRequired": "Senha é obrigatorio",
+    "passwordTooShort": "Senha muito curta",
+    "passwordsDoNotMatch": "As senhas não conferem",
+    "emailRequired": "E-mail é obrigatorio",
+    "emailInvalid": "E-mail inválido",
+    "requiredField": "Campo obrigatório"
 }

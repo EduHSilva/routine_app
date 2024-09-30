@@ -1,50 +1,176 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:routineapp/config/design_system.dart';
+import 'package:routineapp/config/helper.dart';
+import 'package:routineapp/models/user_model.dart';
+import 'package:routineapp/views/auth/login_view.dart';
+import 'package:routineapp/widgets/custom_button.dart';
+import 'package:routineapp/widgets/custom_text_field.dart';
+import '../../viewmodels/auth_viewmodel.dart';
 
-class RegisterView extends StatelessWidget {
+class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
+
+  @override
+  RegisterViewState createState() => RegisterViewState();
+}
+class RegisterViewState extends State<RegisterView> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordConfirmController = TextEditingController();
+
+  final AuthViewmodel _authViewModel = AuthViewmodel();
+  bool _isLoading = false;
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'emailRequired'.tr();
+    }
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(value)) {
+      return 'emailInvalid'.tr();
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'passwordRequired'.tr();
+    }
+    if (value.length < 6) {
+      return 'passwordTooShort'.tr();
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value != _passwordController.text) {
+      return 'passwordsDoNotMatch'.tr();
+    }
+    return null;
+  }
+
+  bool _validateForm() {
+    return _formKey.currentState?.validate() ?? false;
+  }
+
+  _signUp() async {
+    if (!_validateForm()) {
+      return; 
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    UserResponse? response = await _authViewModel.register(
+        _nameController.text, _emailController.text, _passwordController.text);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (!mounted) return;
+    if (response?.user != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('success'.tr()),
+          action: SnackBarAction(
+              label: 'login'.tr(),
+              onPressed: () => {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoginView(),
+                    ))
+                  }),
+        ),
+      );
+    } else {
+      if (response?.message != null) {
+        showSnackBar(context, response!.message, isError: true);
+      } else {
+        showSnackBar(context, 'error'.tr(), isError: true);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'name'.tr()),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'email'.tr()),
-            ),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'password'.tr()),
-            ),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'passwordConfirm'.tr()),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                // Implementar a lógica de registro
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(40),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 60.0),
+                        child: Text(
+                          'signUp'.tr(),
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.secondaryVariant,
+                          ),
+                        ),
+                      ),
+                      CustomTextField(
+                        labelText: 'name',
+                        controller: _nameController,
+                        validator: requiredFieldValidator,
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        labelText: 'email',
+                        controller: _emailController,
+                        validator: _validateEmail,
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        isPassword: true,
+                        labelText: 'password',
+                        controller: _passwordController,
+                        validator: _validatePassword,
+                      ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        isPassword: true,
+                        labelText: 'confirmPassword',
+                        controller: _passwordConfirmController,
+                        validator: _validateConfirmPassword,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 50.0),
+                        child: Column(
+                          children: [
+                            CustomButton(
+                              text: 'signUp',
+                              onPressed: _signUp,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const LoginView(),
+                                ));
+                              },
+                              text: 'signIn',
+                              isOutlined: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: Text('signUp'.tr()),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('signIn'.tr()),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
