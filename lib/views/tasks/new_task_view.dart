@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:routineapp/widgets/custom_text_field.dart';
-import 'package:intl/intl.dart'; // Para formatação de datas
 
 import '../../../viewmodels/tasks_viewmodel.dart';
 import '../../config/app_config.dart';
@@ -28,7 +27,6 @@ class NewTaskViewState extends State<NewTaskView> {
     });
   }
 
-  final CategoryViewModel _categoryViewModel = CategoryViewModel();
   final _formKey = GlobalKey<FormState>();
   final TasksViewModel _tasksViewModel = TasksViewModel();
 

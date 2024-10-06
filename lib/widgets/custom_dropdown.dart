@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:routineapp/config/design_system.dart';
+import 'package:flutter/material.dart';
 
 class DropdownItem<T> {
   final String label; // O que será mostrado no dropdown
