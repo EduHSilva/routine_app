@@ -32,8 +32,8 @@ class CategoryResponse extends DefaultResponse {
 
   CategoryResponse({
     this.category,
-    required message,
-  }) : super(message: '');
+    required super.message,
+  });
 
   factory CategoryResponse.fromJson(Map<String, dynamic> json) {
     return CategoryResponse(

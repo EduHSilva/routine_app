@@ -1,7 +1,7 @@
 import 'package:routineapp/config/app_config.dart';
-import 'package:routineapp/models/user_model.dart';
 
-import '../models/login_model.dart';
+import '../models/user/login_model.dart';
+import '../models/user/user_model.dart';
 import '../services/auth_service.dart';
 
 class AuthViewModel {

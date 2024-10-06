@@ -8,6 +8,8 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool readOnly;
+  final Future<void> Function()? onTap; // Mudança: Definir tipo correto para onTap
 
   const CustomTextField({
     super.key,
@@ -16,6 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     required this.controller,
     this.validator,
+    this.readOnly = false,
+    this.onTap, // Mudança: onTap agora pode ser null
   });
 
   @override
@@ -23,30 +27,34 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: isPassword,
+      readOnly: readOnly, // Definir se o campo é somente leitura
+      onTap: readOnly && onTap != null // Executar onTap se o campo for readonly e onTap não for null
+          ? () async => await onTap!()
+          : null,
       decoration: InputDecoration(
-        labelText: labelText.tr(), 
+        labelText: labelText.tr(),
         labelStyle: const TextStyle(
-          color: AppColors.onSurface, 
+          color: AppColors.onSurface,
         ),
         filled: true,
-        fillColor: AppColors.surface, 
+        fillColor: AppColors.surface,
         prefixIcon: prefixIcon != null
             ? Icon(
-                prefixIcon,
-                color: AppColors.secondary, 
-              )
+          prefixIcon,
+          color: AppColors.secondary,
+        )
             : null,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12), 
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.primary, 
+            color: AppColors.primary,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.onSurface, 
-            width: 1.0, 
+            color: AppColors.onSurface,
+            width: 1.0,
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -59,7 +67,7 @@ class CustomTextField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
-            color: AppColors.error, 
+            color: AppColors.error,
             width: 2.0,
           ),
         ),

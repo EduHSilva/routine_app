@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:routineapp/config/design_system.dart';
-import 'package:routineapp/views/tasks/category_tab.dart';
+import 'package:routineapp/views/tasks/tabs/category_tab.dart';
+import 'package:routineapp/views/tasks/tabs/rules_tab.dart';
 import 'package:routineapp/widgets/custom_appbar.dart';
 import 'package:routineapp/widgets/custom_drawer.dart';
 import 'package:routineapp/config/app_config.dart';
 import 'package:routineapp/viewmodels/tasks_viewmodel.dart';
-import 'package:routineapp/views/tasks/all_tasks_tab.dart';
-import 'package:routineapp/views/tasks/completed_tasks_tab.dart';
-import '../../models/task_model.dart';
+import 'package:routineapp/views/tasks/tabs/all_tasks_tab.dart';
+import '../../models/tasks/task_model.dart';
 
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
@@ -68,7 +68,7 @@ class TasksViewState extends State<TasksView> {
             : TabBarView(
                 children: [
                   AllTasksTab(tasksByDay: _tasksByDay),
-                  CompletedTasksTab(tasksByDay: _tasksByDay),
+                  const RulesTab(),
                   const CategoryTab(),
                 ],
               ),

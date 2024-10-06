@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routineapp/models/task_model.dart';
+import 'package:routineapp/models/tasks/task_model.dart';
 
 class AllTasksTab extends StatelessWidget {
   final Map<String, List<Task>>? tasksByDay;

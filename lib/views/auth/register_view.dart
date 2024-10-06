@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:routineapp/config/design_system.dart';
 import 'package:routineapp/config/helper.dart';
-import 'package:routineapp/models/user_model.dart';
 import 'package:routineapp/views/auth/login_view.dart';
 import 'package:routineapp/widgets/custom_button.dart';
 import 'package:routineapp/widgets/custom_text_field.dart';
+import '../../models/user/user_model.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 
 class RegisterView extends StatefulWidget {

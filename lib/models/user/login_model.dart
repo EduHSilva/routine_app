@@ -1,5 +1,5 @@
 import 'package:routineapp/models/response.dart';
-import 'package:routineapp/models/user_model.dart';
+import 'package:routineapp/models/user/user_model.dart';
 
 class LoginResponse extends DefaultResponse {
   final User? user;

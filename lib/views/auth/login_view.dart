@@ -5,7 +5,7 @@ import 'package:routineapp/config/helper.dart';
 import 'package:routineapp/views/auth/register_view.dart';
 import 'package:routineapp/widgets/custom_button.dart';
 import 'package:routineapp/widgets/custom_text_field.dart';
-import '../../models/login_model.dart';
+import '../../models/user/login_model.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 
 class LoginView extends StatefulWidget {
