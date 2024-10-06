@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routineapp/config/app_config.dart';
 import 'package:routineapp/config/design_system.dart';
 import 'package:routineapp/views/auth/register_view.dart';
 import 'package:routineapp/views/auth/splash_view.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
     ),
   );
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -42,7 +44,10 @@ class MyAppState extends State<MyApp> {
   Future<void> _checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('user_token');
-    if (token != null && token.isNotEmpty) {
+    String? user = prefs.getString('user');
+
+    if (token != null && token.isNotEmpty && user != null && user.isNotEmpty) {
+      AppConfig.getUser();
       setState(() {
         _initialRoute = '/home'; 
       });

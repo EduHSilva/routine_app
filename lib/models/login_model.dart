@@ -8,8 +8,8 @@ class LoginResponse extends DefaultResponse {
   LoginResponse({
     this.user,
     this.token,
-    required message,
-  }) : super(message: '');
+    required super.message,
+  });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(

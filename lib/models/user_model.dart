@@ -22,6 +22,15 @@ class User {
       lastLogin: json['lastLogin'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'lastLogin': lastLogin,
+    };
+  }
 }
 
 class UserResponse extends DefaultResponse{

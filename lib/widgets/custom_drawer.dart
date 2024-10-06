@@ -1,13 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:routineapp/config/app_config.dart';
 import 'package:routineapp/config/design_system.dart';
-import 'package:routineapp/viewmodels/auth_viewmodel.dart';
 import 'package:routineapp/views/auth/splash_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String currentRoute;
 
-  CustomDrawer({super.key, required this.currentRoute});
-  final AuthViewmodel _authViewModel = AuthViewmodel();
+  const CustomDrawer({super.key, required this.currentRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,13 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: AppColors.secondaryGradient, 
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: AppColors.primaryGradient,
             ),
             child: Text(
-              'Menu',
-              style: TextStyle(
+              'welcome'.tr() + AppConfig.user!.name ,
+              style: const TextStyle(
                 color: AppColors.onPrimary, 
                 fontSize: 24,
               ),
@@ -53,8 +53,8 @@ class CustomDrawer extends StatelessWidget {
             icon: Icons.logout,
             text: 'Logout',
             onTap: () {
-              _authViewModel.removeToken();
-               
+              AppConfig.cleanStorage();
+              
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const SplashView(),
                       ));
@@ -77,13 +77,13 @@ class CustomDrawer extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: isActive ? AppColors.secondary : AppColors.onBackground, 
+        color: isActive ? AppColors.primary : AppColors.onBackground,
       ),
       title: Text(
         text,
         style: TextStyle(
           fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-          color: isActive ? AppColors.secondary : AppColors.onBackground, 
+          color: isActive ? AppColors.primary: AppColors.onBackground,
         ),
       ),
       onTap: () {

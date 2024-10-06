@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
+import 'package:routineapp/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AppConfig {
-  static String get apiUrl => dotenv.env['URL_API'] ?? 'http://default-url.com/';
+  static User? user;
+  static String get apiUrl =>
+      dotenv.env['URL_API'] ?? 'http://default-url.com/';
 
   static Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -21,6 +26,37 @@ class AppConfig {
     var logger = Logger();
     return logger;
   }
+
+  static Future<void> saveToken(String? token) async {
+    if (token != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('user_token', token);
+    }
+  }
+
+  static Future<void> saveUser(User? userSave) async {
+    if (userSave != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userJson = jsonEncode(userSave.toJson());
+      user = user;
+      await prefs.setString('user', userJson);
+    }
+  }
+
+static Future<void> getUser() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? userJson = prefs.getString('user');
+
+  if (userJson != null) {
+    user = User.fromJson(jsonDecode(userJson));
+  }
+}
+
+  static Future<void> cleanStorage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('user_token');
+    await prefs.remove('user');
+  }
 }
 
 class _HttpClientWithBearerToken extends http.BaseClient {
@@ -34,8 +70,9 @@ class _HttpClientWithBearerToken extends http.BaseClient {
     if (token != null) {
       request.headers['x-access-token'] = '$token';
     }
+
+    request.headers['Content-Type'] = 'application/json; charset=UTF-8';
+
     return _client.send(request);
   }
 }
-
-

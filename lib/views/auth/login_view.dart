@@ -18,7 +18,7 @@ class LoginView extends StatefulWidget {
 class LoginViewState extends State<LoginView> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final AuthViewmodel _authViewModel = AuthViewmodel();
+  final AuthViewModel _authViewModel = AuthViewModel();
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
@@ -45,11 +45,7 @@ class LoginViewState extends State<LoginView> {
     if (response?.user != null) {
       Navigator.pushReplacementNamed(context, '/home');
     } else {
-     if (response?.message != null) {
-        showSnackBar(context, response!.message, isError: true);
-      } else {
-        showSnackBar(context, 'error'.tr(), isError: true);
-      }
+      showErrorBar(context, response);
     }
   }
 
@@ -59,9 +55,9 @@ class LoginViewState extends State<LoginView> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 0),
+              padding: const EdgeInsets.fromLTRB(16.0, 60.0, 16.0, 0),
               child: Form(
-                key: _formKey, // Vincula o formKey aqui
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,14 +75,14 @@ class LoginViewState extends State<LoginView> {
                     CustomTextField(
                       labelText: 'email',
                       controller: _usernameController,
-                      validator: requiredFieldValidator, // Validação ativa
+                      validator: requiredFieldValidator, 
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       isPassword: true,
                       labelText: 'password',
                       controller: _passwordController,
-                      validator: requiredFieldValidator, // Validação ativa
+                      validator: requiredFieldValidator,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 50.0),
@@ -94,7 +90,7 @@ class LoginViewState extends State<LoginView> {
                         children: [
                           CustomButton(
                             text: 'login',
-                            onPressed: _login, // Chama o login que valida o form
+                            onPressed: _login,
                           ),
                           const SizedBox(height: 10),
                           CustomButton(

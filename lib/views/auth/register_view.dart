@@ -22,7 +22,7 @@ class RegisterViewState extends State<RegisterView> {
   final _passwordController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
 
-  final AuthViewmodel _authViewModel = AuthViewmodel();
+  final AuthViewModel _authViewModel = AuthViewModel();
   bool _isLoading = false;
 
   String? _validateEmail(String? value) {
@@ -88,11 +88,7 @@ class RegisterViewState extends State<RegisterView> {
         ),
       );
     } else {
-      if (response?.message != null) {
-        showSnackBar(context, response!.message, isError: true);
-      } else {
-        showSnackBar(context, 'error'.tr(), isError: true);
-      }
+      showErrorBar(context, response);
     }
   }
 
@@ -103,7 +99,7 @@ class RegisterViewState extends State<RegisterView> {
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 0),
+                padding: const EdgeInsets.fromLTRB(16.0, 60.0, 16.0, 0),
                 child: Form(
                   key: _formKey,
                   child: Column(

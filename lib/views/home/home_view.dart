@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:routineapp/widgets/custom_appbar.dart';
 import 'package:routineapp/widgets/custom_drawer.dart';
@@ -9,16 +10,15 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Home'),
-      drawer: CustomDrawer(currentRoute: '/home'),
+      drawer: const CustomDrawer(currentRoute: '/home'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Search Box
             TextField(
               decoration: InputDecoration(
-                labelText: 'Pesquisar',
+                labelText: 'search'.tr(),
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -29,14 +29,13 @@ class HomeView extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
-            // Search Results Section
             const Text(
               'Resultados da Busca:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 3, // exemplo: quantidade de resultados da busca
+                itemCount: 3, 
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const Icon(Icons.task_alt),
@@ -47,14 +46,13 @@ class HomeView extends StatelessWidget {
               ),
             ),
             const Divider(thickness: 2),
-            // Pending Tasks Section
-            const Text(
-              'Tarefas Pendentes:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              'pendingTasks'.tr(),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 2, // Exemplo: número de tarefas pendentes
+                itemCount: 2, 
                 itemBuilder: (context, index) {
                   return Card(
                     margin: const EdgeInsets.symmetric(vertical: 8),
@@ -69,9 +67,9 @@ class HomeView extends StatelessWidget {
             ),
             const Divider(thickness: 2),
             // Next Meal Section
-            const Text(
-              'Próxima Refeição:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              'nextMealth'.tr(),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const Card(
               margin: EdgeInsets.symmetric(vertical: 10),

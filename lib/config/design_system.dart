@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF018786);
-  static const Color primaryVariant = Color(0xFF018786);
+  static const Color primary = Color(0xFF510187);
+  static const Color primaryVariant = Color(0xFF3D0187);
   static const Color secondary = Color(0xFF03DAC6);
   static const Color secondaryVariant = Color(0xFF018786);
   static const Color background = Color(0xFFF5F5F5); // Mudança para cinza claro no fundo
@@ -14,7 +14,6 @@ class AppColors {
   static const Color onSurface = Color(0xFF000000);
   static const Color onError = Color(0xFFFFFFFF);
 
-  // Adicionar gradientes
   static const Gradient primaryGradient = LinearGradient(
     colors: [primary, primaryVariant],
     begin: Alignment.topLeft,

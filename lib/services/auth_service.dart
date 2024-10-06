@@ -28,7 +28,7 @@ class AuthService {
         return LoginResponse(message: jsonResponse['message']);
       }
     } catch (e) {
-      //
+      AppConfig.getLogger().e(e);
     }
     return null;
   }
@@ -57,6 +57,7 @@ class AuthService {
         return UserResponse(message: jsonResponse['message']);
       }
     } catch (e) {
+      AppConfig.getLogger().e(e);
       return null;
     }
   }

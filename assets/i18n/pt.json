@@ -10,7 +10,7 @@
     "signUp": "Cadastre-se",
     "signIn": "Ir para login",
     "confirmPassword": "Confirme sua senha",
-    "name": "Nome completo",
+    "name": "Nome",
     "error": "Ocorreu um erro em sua solicitação!",
     "success": "Operação realizada com sucesso!",
     "passwordRequired": "Senha é obrigatorio",
@@ -18,5 +18,16 @@
     "passwordsDoNotMatch": "As senhas não conferem",
     "emailRequired": "E-mail é obrigatorio",
     "emailInvalid": "E-mail inválido",
-    "requiredField": "Campo obrigatório"
+    "requiredField": "Campo obrigatório",
+    "pendingTasks": "Tarefas pendentes",
+    "search": "Pesquisar",
+    "nextMealth": "Proxima refeicao",
+    "noData": "Sem dados",
+    "categories": "Categorias",
+    "add": "Adicionar",
+    "cancel": "Cancelar",
+    "attention": "Atenção",
+    "edit": "Editar",
+    "confirmDelete": "Certeza que quer seguir com a ação de exclusão ? Isto é irreversível.",
+    "confirm": "Confirmar"
 }

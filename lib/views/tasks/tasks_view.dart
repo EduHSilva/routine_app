@@ -18,7 +18,7 @@ class TasksView extends StatefulWidget {
 
 class TasksViewState extends State<TasksView> {
   bool _isLoading = false;
-  final TasksViewmodel _tasksViewModel = TasksViewmodel();
+  final TasksViewModel _tasksViewModel = TasksViewModel();
   Map<String, List<Task>>? _tasksByDay;
 
   @override
@@ -54,7 +54,7 @@ class TasksViewState extends State<TasksView> {
         appBar: const CustomAppBar(
           title: 'Tasks',
           bottom: TabBar(
-            labelColor: AppColors.onSurface,
+            labelColor: AppColors.onPrimary,
             tabs: [
               Tab(text: 'Semana'),
               Tab(text: 'Regras'),
@@ -62,14 +62,14 @@ class TasksViewState extends State<TasksView> {
             ],
           ),
         ),
-        drawer: CustomDrawer(currentRoute: "/tasks"),
+        drawer: const CustomDrawer(currentRoute: "/tasks"),
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : TabBarView(
                 children: [
                   AllTasksTab(tasksByDay: _tasksByDay),
                   CompletedTasksTab(tasksByDay: _tasksByDay),
-                  CategoryTab(tasksByDay: _tasksByDay),
+                  const CategoryTab(),
                 ],
               ),
       ),
