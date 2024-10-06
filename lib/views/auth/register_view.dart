@@ -29,7 +29,7 @@ class RegisterViewState extends State<RegisterView> {
     if (value == null || value.isEmpty) {
       return 'emailRequired'.tr();
     }
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
       return 'emailInvalid'.tr();
     }
